@@ -20,6 +20,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.QuestioMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeSummaryMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeEquipamentParametersMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeIngredientsParametersMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -306,6 +307,32 @@ public class SpoonacularService {
         );
         call.enqueue(callback);
     }
+
+    /**
+     * Visualize Ingredients
+     * Visualize ingredients of a recipe.
+     *
+     * @param visualizeIngredientsParametersMapper
+     * @param callback
+     */
+    public void visualizeIngredients(final VisualizeIngredientsParametersMapper visualizeIngredientsParametersMapper,
+                                    final Callback<String> callback) {
+
+        Call<String> call = spoonacularService.visualizeIngredients(
+                MASHAPE_KEY,
+                TEXT_HTML_ACCEPT_HEADER,
+                visualizeIngredientsParametersMapper.isDefaultCss(),
+                visualizeIngredientsParametersMapper.getIngredientsListAsStringPerLine(),
+                visualizeIngredientsParametersMapper.getMeasure(),
+                visualizeIngredientsParametersMapper.getServings(),
+                visualizeIngredientsParametersMapper.isShowBacklink(),
+                visualizeIngredientsParametersMapper.getView()
+        );
+        call.enqueue(callback);
+    }
+
+
+
 
     /**
      * ANOTHER CATEGORY
