@@ -92,7 +92,11 @@ public class SpoonacularService {
     public void classifyAGroceryProduct(final GroceryProductClassifierMapper groceryProductClassifierMapper,
                                         final Callback<ClassifiedProduct> callback) {
 
-        Call<ClassifiedProduct> call = spoonacularService.classifyAGroceryProduct(MASHAPE_KEY, APP_JSON_CONTENT_TYPE_HEADER, ACCEPT_HEADER, groceryProductClassifierMapper);
+        Call<ClassifiedProduct> call = spoonacularService.classifyAGroceryProduct(
+                MASHAPE_KEY,
+                APP_JSON_CONTENT_TYPE_HEADER,
+                ACCEPT_HEADER,
+                groceryProductClassifierMapper);
         call.enqueue(callback);
     }
 
@@ -106,10 +110,11 @@ public class SpoonacularService {
     public void classifyCuisine(final CuisineClassifierMapper cuisineClassifierMapper,
                                 final Callback<ClassifiedCuisine> callback) {
 
-        Call<ClassifiedCuisine> call = spoonacularService
-                .classifyCuisine(MASHAPE_KEY, URL_FORM_CONTENT_TYPE_HEADER, ACCEPT_HEADER,
-                        cuisineClassifierMapper.getIngredientList(),
-                        cuisineClassifierMapper.getTitle());
+        Call<ClassifiedCuisine> call = spoonacularService.classifyCuisine(
+            MASHAPE_KEY,
+            URL_FORM_CONTENT_TYPE_HEADER, ACCEPT_HEADER,
+            cuisineClassifierMapper.getIngredientListAsString(),
+            cuisineClassifierMapper.getTitle());
 
         call.enqueue(callback);
     }
@@ -124,8 +129,11 @@ public class SpoonacularService {
     public void classifyAGroceryProductBatch(final GroceryProductClassifierBatchMapper groceryProductClassifierBatchMapper,
                                              final Callback<List<ClassifiedProduct>> callback) {
 
-        Call<List<ClassifiedProduct>> call = spoonacularService.classifyAGroceryProductBatch(MASHAPE_KEY,
-                APP_JSON_CONTENT_TYPE_HEADER, ACCEPT_HEADER, groceryProductClassifierBatchMapper);
+        Call<List<ClassifiedProduct>> call = spoonacularService.classifyAGroceryProductBatch(
+                MASHAPE_KEY,
+                APP_JSON_CONTENT_TYPE_HEADER,
+                ACCEPT_HEADER,
+                groceryProductClassifierBatchMapper);
         call.enqueue(callback);
     }
 
@@ -189,7 +197,7 @@ public class SpoonacularService {
                 APP_JSON_CONTENT_TYPE_HEADER,
                 ACCEPT_HEADER,
                 mealMapper.getDiet(),
-                mealMapper.getExclude(),
+                mealMapper.getExcludeListAsString(","),
                 mealMapper.getTargetCalories(),
                 mealMapper.getTimeFrame()
         );

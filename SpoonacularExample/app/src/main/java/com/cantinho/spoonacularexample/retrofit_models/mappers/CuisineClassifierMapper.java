@@ -26,7 +26,7 @@ public class CuisineClassifierMapper {
         this.title = title;
     }
 
-    public String getIngredientList() {
+    public String getIngredientListAsString() {
         return ingredientList;
     }
 
