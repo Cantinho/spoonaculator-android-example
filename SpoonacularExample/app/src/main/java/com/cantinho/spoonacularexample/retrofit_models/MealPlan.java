@@ -13,10 +13,14 @@ public class MealPlan {
     @SerializedName("meals")
     private List<Meal> meals = new ArrayList<>();
 
+    @SerializedName("nutrients")
+    private Nutrients nutrients;
+
     public MealPlan() {}
 
-    public MealPlan(List<Meal> meals) {
+    public MealPlan(List<Meal> meals, Nutrients nutrients) {
         this.meals = meals;
+        this.nutrients = nutrients;
     }
 
     public List<Meal> getMeals() {
@@ -27,10 +31,19 @@ public class MealPlan {
         this.meals = meals;
     }
 
+    public Nutrients getNutrients() {
+        return nutrients;
+    }
+
+    public void setNutrients(Nutrients nutrients) {
+        this.nutrients = nutrients;
+    }
+
     @Override
     public String toString() {
         return "MealPlan{" +
                 "meals=" + meals +
+                ", nutrients=" + nutrients +
                 '}';
     }
 

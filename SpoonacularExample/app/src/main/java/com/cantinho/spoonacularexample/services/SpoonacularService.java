@@ -78,7 +78,7 @@ public class SpoonacularService {
     }
 
     /**
-     * CLASSIFIERS
+     * COMPUTE
      */
 
     /**
@@ -205,12 +205,6 @@ public class SpoonacularService {
         call.enqueue(callback);
     }
 
-
-
-    /**
-     * ANOTHER CATEGORY
-     */
-
     public void mapIngredientsToGroceryProducts(final GroceryProductsMapper groceryProductsMapper,
                                                 final Callback<List<GroceryProducts>> callback) {
 
@@ -220,6 +214,8 @@ public class SpoonacularService {
 
         call.enqueue(callback);
     }
+
+
 
     /**
      * ANOTHER CATEGORY
