@@ -10,8 +10,10 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductCla
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.Recipe;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -64,6 +66,8 @@ public interface ISpoonacularService {
             @Query("targetUnit") String targetUnit
     );
 
+
+
     /**
      * ANOTHER CATEGORY
      */
@@ -94,7 +98,19 @@ public interface ISpoonacularService {
             @Path("id") int id,
             @Query("includeNutrition") boolean includeNutrition);
 
-
-
-
+    @POST("recipes/visualizeRecipe")
+    Call<ResponseBody> createRecipeCard(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Field("author") String author,
+            @Field("backgroundColor") String backgroundColor,
+            @Field("backgroundImage") String backgroundImage,
+            @Field("fontColor") String fontColor,
+            @Field("image") File image,
+            @Field("ingredients") String ingredients,
+            @Field("instructions") String instructions,
+            @Field("mask") String mask,
+            @Field("readyInMinutes") int readyInMinutes,
+            @Field("servings") int servings,
+            @Field("source") String source,
+            @Field("title") String title);
 }

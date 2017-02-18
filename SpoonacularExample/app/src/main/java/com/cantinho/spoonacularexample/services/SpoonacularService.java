@@ -11,6 +11,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductCla
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.IngredientsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.Recipe;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -135,13 +137,33 @@ public class SpoonacularService {
     public void convertAmounts(final AmountMapper amountMapper,
                                final Callback<ConvertedAmount> callback) {
 
-        Call<ConvertedAmount> call = spoonacularService.convertAmounts(MASHAPE_KEY, ACCEPT_HEADER,
+        Call<ConvertedAmount> call = spoonacularService.convertAmounts(
+                MASHAPE_KEY,
+                ACCEPT_HEADER,
                 amountMapper.getIngredientName(),
                 amountMapper.getSourceAmount(),
                 amountMapper.getSourceUnit(),
                 amountMapper.getTargetUnit());
 
         call.enqueue(callback);
+    }
+
+    // todo: we must test this.
+    public void createRecipeCard(final RecipeMapper recipeMapper, final Callback<ResponseBody> callback) {
+        Call<ResponseBody> call = spoonacularService.createRecipeCard(
+                MASHAPE_KEY,
+                recipeMapper.getAuthor(),
+                recipeMapper.getBackgroundColor(),
+                recipeMapper.getBackgroundImage(),
+                recipeMapper.getFontColor(),
+                recipeMapper.getImage(),
+                recipeMapper.getIngredientsAsStringPerLine(),
+                recipeMapper.getInstructionsAsStringPerLine(),
+                recipeMapper.getMask(),
+                recipeMapper.getReadyInMinutes(),
+                recipeMapper.getServings(),
+                recipeMapper.getSource(),
+                recipeMapper.getTitle());
     }
 
 
