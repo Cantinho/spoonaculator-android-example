@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample;
+package com.cantinho.spoonacularexample.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.cantinho.spoonacularexample.R;
+import com.cantinho.spoonacularexample.activities.MainMenuActivity;
+import com.cantinho.spoonacularexample.activities.MenuItem01Activity;
+import com.cantinho.spoonacularexample.activities.MenuItem02Activity;
+import com.cantinho.spoonacularexample.activities.MenuItem03Activity;
+import com.cantinho.spoonacularexample.activities.MenuItem04Activity;
+import com.cantinho.spoonacularexample.models.Card;
 
 import java.util.ArrayList;
 

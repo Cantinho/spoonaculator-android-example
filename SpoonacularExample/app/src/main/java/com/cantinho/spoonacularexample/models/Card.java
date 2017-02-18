@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample;
+package com.cantinho.spoonacularexample.models;
 
 /**
  * Created by samirtf on 14/02/17.

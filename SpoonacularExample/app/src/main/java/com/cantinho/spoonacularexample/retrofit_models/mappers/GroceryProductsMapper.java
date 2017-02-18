@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample.retrofit_models;
+package com.cantinho.spoonacularexample.retrofit_models.mappers;
 
 import com.google.gson.annotations.SerializedName;
 

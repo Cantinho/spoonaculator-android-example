@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample;
+package com.cantinho.spoonacularexample.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
-import com.cantinho.spoonacularexample.retrofit_models.GroceryProductsMapper;
+import com.cantinho.spoonacularexample.R;
 import com.cantinho.spoonacularexample.retrofit_models.Recipe;
-import com.google.gson.Gson;
+import com.cantinho.spoonacularexample.services.ISpoonacularService;
+import com.cantinho.spoonacularexample.services.SpoonacularService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -26,16 +25,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Query;
 
-import static com.cantinho.spoonacularexample.SpoonacularService.MASHAPE_KEY;
 
 public class MenuItem02Activity extends AppCompatActivity {
 
     // Trailing slash is needed
     public static final String BASE_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/";
 
-    private SpoonacularService spoonacularService;
+    private ISpoonacularService spoonacularService;
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     private static final OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -77,7 +74,7 @@ public class MenuItem02Activity extends AppCompatActivity {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
-                .build().create(SpoonacularService.class);
+                .build().create(ISpoonacularService.class);
 
         fillIngredientsEditText = (EditText) findViewById(R.id.fill_ingredients_edit_text);
         ingredientsEditText = (EditText) findViewById(R.id.ingredients_edit_text);
@@ -131,7 +128,7 @@ public class MenuItem02Activity extends AppCompatActivity {
 
             String ingredients = ingredientsList.replace(" ", "").trim();
 
-            Call<List<Recipe>> call = spoonacularService.recipesByIngredients(MASHAPE_KEY, "application/json", "application/json", mustFillIngredients, ingredientsList, mustLimitLicense, numberAsInteger, rankingAsInteger);
+            Call<List<Recipe>> call = spoonacularService.findRecipesByIngredients(SpoonacularService.MASHAPE_KEY, "application/json", "application/json", mustFillIngredients, ingredientsList, mustLimitLicense, numberAsInteger, rankingAsInteger);
             call.enqueue(new Callback<List<Recipe>>() {
 
                 @Override

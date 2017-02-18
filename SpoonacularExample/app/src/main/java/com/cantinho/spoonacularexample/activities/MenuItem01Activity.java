@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample;
+package com.cantinho.spoonacularexample.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cantinho.spoonacularexample.R;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
-import com.cantinho.spoonacularexample.retrofit_models.GroceryProductsMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMapper;
+import com.cantinho.spoonacularexample.services.ISpoonacularService;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class MenuItem01Activity extends AppCompatActivity {
     // Trailing slash is needed
     public static final String BASE_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/";
 
-    private SpoonacularService spoonacularService;
+    private ISpoonacularService spoonacularService;
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     private static final OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -70,7 +72,7 @@ public class MenuItem01Activity extends AppCompatActivity {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
-                .build().create(SpoonacularService.class);
+                .build().create(ISpoonacularService.class);
 
         ingredientsEditText = (EditText) findViewById(R.id.ingredients_edit_text);
         servingsEditText = (EditText) findViewById(R.id.servings_edit_text);
@@ -121,7 +123,7 @@ public class MenuItem01Activity extends AppCompatActivity {
             String json = gson.toJson(groceryProductsMapper);
             System.out.println(json);
 
-            Call<List<GroceryProducts>> call = spoonacularService.groceryProducts(mashapeKey, "application/json", "application/json", groceryProductsMapper);
+            Call<List<GroceryProducts>> call = spoonacularService.mapIngredientsToGroceryProducts(mashapeKey, "application/json", "application/json", groceryProductsMapper);
             call.enqueue(new Callback<List<GroceryProducts>>() {
 
                 @Override

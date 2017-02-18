@@ -10,17 +10,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenuActivity">
+        <activity android:name=".activities.MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuItem01Activity"></activity>
-        <activity android:name=".MenuItem02Activity"></activity>
-        <activity android:name=".MenuItem03Activity"></activity>
-        <activity android:name=".MenuItem04Activity"></activity>
+        <activity android:name=".activities.MenuItem01Activity"></activity>
+        <activity android:name=".activities.MenuItem02Activity"></activity>
+        <activity android:name=".activities.MenuItem03Activity"></activity>
+        <activity android:name=".activities.MenuItem04Activity"></activity>
     </application>
 
 </manifest>

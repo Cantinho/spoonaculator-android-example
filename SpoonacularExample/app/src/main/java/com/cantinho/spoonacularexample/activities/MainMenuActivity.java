@@ -1,4 +1,4 @@
-package com.cantinho.spoonacularexample;
+package com.cantinho.spoonacularexample.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import com.cantinho.spoonacularexample.Card;
+import com.cantinho.spoonacularexample.adapters.MyAdapter;
+import com.cantinho.spoonacularexample.R;
 
 import java.util.ArrayList;
 import java.util.Map;
