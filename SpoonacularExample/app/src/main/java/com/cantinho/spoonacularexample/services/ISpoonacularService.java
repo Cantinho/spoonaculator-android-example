@@ -28,7 +28,7 @@ import retrofit2.http.Query;
 public interface ISpoonacularService {
 
     /**
-     * CLASSIFIERS
+     * COMPUTE
      */
 
     @POST("food/products/classify")
@@ -92,6 +92,14 @@ public interface ISpoonacularService {
             @Query("exclude") String exclude,
             @Query("targetCalories") int targetCalories,
             @Query("timeFrame") String timeFrame
+    );
+
+    @GET("recipes/mealplans/generate")
+    Call<MealPlan> matchRecipesToDailyCalories(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String accept,
+            @Query("targetCalories") int targetCalories,
+            @Query("day") String day
     );
 
 

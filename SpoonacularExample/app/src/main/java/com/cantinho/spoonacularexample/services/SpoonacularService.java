@@ -7,6 +7,7 @@ import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
 import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.CuisineClassifierMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.DailyCaloriesMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierBatchMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMapper;
@@ -205,6 +206,13 @@ public class SpoonacularService {
         call.enqueue(callback);
     }
 
+    /**
+     * Map Ingredients to Grocery Products
+     * Map a set of ingredients to products you can buy in the grocery store.
+     *
+     * @param groceryProductsMapper
+     * @param callback
+     */
     public void mapIngredientsToGroceryProducts(final GroceryProductsMapper groceryProductsMapper,
                                                 final Callback<List<GroceryProducts>> callback) {
 
@@ -215,6 +223,24 @@ public class SpoonacularService {
         call.enqueue(callback);
     }
 
+    /**
+     * Match Recipes to Daily Calories
+     * Find multiple recipes that, when added up reach your daily caloric needs.
+     *
+     *
+     * @param dailyCaloriesMapper
+     * @param callback
+     */
+    public void matchRecipesToDailyCalories(final DailyCaloriesMapper dailyCaloriesMapper,
+                                            final Callback<MealPlan> callback) {
+        Call<MealPlan> call = spoonacularService.matchRecipesToDailyCalories(
+                MASHAPE_KEY,
+                ACCEPT_HEADER,
+                dailyCaloriesMapper.getTargetCalories(),
+                dailyCaloriesMapper.getTimeFrame()
+        );
+        call.enqueue(callback);
+    }
 
 
     /**
