@@ -5,6 +5,7 @@ import com.cantinho.spoonacularexample.retrofit_models.ClassifiedProduct;
 import com.cantinho.spoonacularexample.retrofit_models.ConvertedAmount;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
 import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
+import com.cantinho.spoonacularexample.retrofit_models.QuickAnswer;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.CuisineClassifierMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.DailyCaloriesMapper;
@@ -14,6 +15,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMa
 import com.cantinho.spoonacularexample.retrofit_models.mappers.IngredientsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.Recipe;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.MealMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.QuestioMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 
 import java.io.IOException;
@@ -241,6 +243,24 @@ public class SpoonacularService {
         );
         call.enqueue(callback);
     }
+
+    /**
+     * Quick Answer
+     * Answer a nutrition related natural language question.
+     *
+     * @param questioMapper
+     * @param callback
+     */
+    public void getQuickAnswer(final QuestioMapper questioMapper,
+                               final Callback<QuickAnswer> callback) {
+
+        Call<QuickAnswer> call = spoonacularService.getQuickAnswer(
+                MASHAPE_KEY,
+                ACCEPT_HEADER,
+                questioMapper.getQ()
+        );
+    }
+
 
 
     /**

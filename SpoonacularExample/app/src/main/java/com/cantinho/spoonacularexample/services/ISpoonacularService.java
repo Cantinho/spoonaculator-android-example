@@ -4,6 +4,7 @@ import com.cantinho.spoonacularexample.retrofit_models.ClassifiedProduct;
 import com.cantinho.spoonacularexample.retrofit_models.ConvertedAmount;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
 import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
+import com.cantinho.spoonacularexample.retrofit_models.QuickAnswer;
 import com.cantinho.spoonacularexample.retrofit_models.RecipeInformation;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierBatchMapper;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -102,6 +104,12 @@ public interface ISpoonacularService {
             @Query("day") String day
     );
 
+    @GET("recipes/quickAnswer")
+    Call<QuickAnswer> getQuickAnswer(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String accept,
+            @Query("q") String q
+    );
 
     /**
      * ANOTHER CATEGORY
