@@ -3,6 +3,7 @@ package com.cantinho.spoonacularexample.services;
 import com.cantinho.spoonacularexample.retrofit_models.ClassifiedProduct;
 import com.cantinho.spoonacularexample.retrofit_models.ConvertedAmount;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
+import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
 import com.cantinho.spoonacularexample.retrofit_models.RecipeInformation;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierBatchMapper;
@@ -66,6 +67,32 @@ public interface ISpoonacularService {
             @Query("targetUnit") String targetUnit
     );
 
+    @POST("recipes/visualizeRecipe")
+    Call<ResponseBody> createRecipeCard(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Field("author") String author,
+            @Field("backgroundColor") String backgroundColor,
+            @Field("backgroundImage") String backgroundImage,
+            @Field("fontColor") String fontColor,
+            @Field("image") File image,
+            @Field("ingredients") String ingredients,
+            @Field("instructions") String instructions,
+            @Field("mask") String mask,
+            @Field("readyInMinutes") int readyInMinutes,
+            @Field("servings") int servings,
+            @Field("source") String source,
+            @Field("title") String title);
+
+
+    Call<MealPlan> generateMealPlan(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Content-Type") String contentType,
+            @Header("Accept") String accept,
+            @Query("diet") String diet,
+            @Query("exclude") String exclude,
+            @Query("targetCalories") int targetCalories,
+            @Query("timeFrame") String timeFrame
+    );
 
 
     /**
@@ -98,19 +125,8 @@ public interface ISpoonacularService {
             @Path("id") int id,
             @Query("includeNutrition") boolean includeNutrition);
 
-    @POST("recipes/visualizeRecipe")
-    Call<ResponseBody> createRecipeCard(
-            @Header("X-Mashape-Key") String mashapeKey,
-            @Field("author") String author,
-            @Field("backgroundColor") String backgroundColor,
-            @Field("backgroundImage") String backgroundImage,
-            @Field("fontColor") String fontColor,
-            @Field("image") File image,
-            @Field("ingredients") String ingredients,
-            @Field("instructions") String instructions,
-            @Field("mask") String mask,
-            @Field("readyInMinutes") int readyInMinutes,
-            @Field("servings") int servings,
-            @Field("source") String source,
-            @Field("title") String title);
+
+
+
+
 }

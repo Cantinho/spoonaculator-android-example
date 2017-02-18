@@ -4,6 +4,7 @@ import com.cantinho.spoonacularexample.retrofit_models.ClassifiedCuisine;
 import com.cantinho.spoonacularexample.retrofit_models.ClassifiedProduct;
 import com.cantinho.spoonacularexample.retrofit_models.ConvertedAmount;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
+import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.CuisineClassifierMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierBatchMapper;
@@ -11,6 +12,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductCla
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.IngredientsMapper;
 import com.cantinho.spoonacularexample.retrofit_models.Recipe;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.MealMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 
 import java.io.IOException;
@@ -149,6 +151,14 @@ public class SpoonacularService {
     }
 
     // todo: we must test this.
+
+    /**
+     * Create Recipe Card
+     * Create a recipe card given a recipe.
+     *
+     * @param recipeMapper
+     * @param callback
+     */
     public void createRecipeCard(final RecipeMapper recipeMapper, final Callback<ResponseBody> callback) {
         Call<ResponseBody> call = spoonacularService.createRecipeCard(
                 MASHAPE_KEY,
@@ -164,6 +174,27 @@ public class SpoonacularService {
                 recipeMapper.getServings(),
                 recipeMapper.getSource(),
                 recipeMapper.getTitle());
+    }
+
+    /**
+     * Generate Meal Plan
+     * Generate a meal plan with three meals per day (breakfast, lunch, and dinner).
+     *
+     * @param mealMapper
+     * @param callback
+     */
+    public void generateMealPlan(final MealMapper mealMapper, final Callback<MealPlan> callback) {
+        Call<MealPlan> call = spoonacularService.generateMealPlan(
+                MASHAPE_KEY,
+                APP_JSON_CONTENT_TYPE_HEADER,
+                ACCEPT_HEADER,
+                mealMapper.getDiet(),
+                mealMapper.getExclude(),
+                mealMapper.getTargetCalories(),
+                mealMapper.getTimeFrame()
+        );
+
+        call.enqueue(callback);
     }
 
 
