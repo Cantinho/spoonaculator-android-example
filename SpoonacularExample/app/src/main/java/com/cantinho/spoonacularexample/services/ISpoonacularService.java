@@ -119,6 +119,15 @@ public interface ISpoonacularService {
             @Path("id") int id
     );
 
+    @POST("recipes/visualizeEquipment")
+    Call<String> visualizeEquipament(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String textHtmlAcceptHeader,
+            @Field("defaultCss") boolean defaultCss,
+            @Field("instructions") String instructions,
+            @Field("showBackLink") boolean showBackLink,
+            @Field("view") String view
+    );
 
     /**
      * ANOTHER CATEGORY
@@ -149,8 +158,6 @@ public interface ISpoonacularService {
             @Header("Accept") String accept,
             @Path("id") int id,
             @Query("includeNutrition") boolean includeNutrition);
-
-
 
 
 

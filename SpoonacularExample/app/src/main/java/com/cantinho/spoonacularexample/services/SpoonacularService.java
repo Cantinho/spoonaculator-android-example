@@ -19,6 +19,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.MealMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.QuestioMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeSummaryMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeEquipamentParametersMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +45,8 @@ public class SpoonacularService {
     public static final String MASHAPE_KEY = "put_your_mashape_key_here";
     public static final String APP_JSON_CONTENT_TYPE_HEADER = "application/json";
     public static final String URL_FORM_CONTENT_TYPE_HEADER = "application/x-www-form-urlencoded";
-    public static final String ACCEPT_HEADER = "application/json";
+    public static final String JSON_ACCEPT_HEADER = "application/json";
+    public static final String TEXT_HTML_ACCEPT_HEADER = "text/html";
 
     private ISpoonacularService spoonacularService;
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -62,7 +64,7 @@ public class SpoonacularService {
 
                 Request request = original.newBuilder()
                         .header("Content-Type", APP_JSON_CONTENT_TYPE_HEADER)
-                        .header("Accept", ACCEPT_HEADER)
+                        .header("Accept", JSON_ACCEPT_HEADER)
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);
@@ -100,7 +102,7 @@ public class SpoonacularService {
         Call<ClassifiedProduct> call = spoonacularService.classifyAGroceryProduct(
                 MASHAPE_KEY,
                 APP_JSON_CONTENT_TYPE_HEADER,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 groceryProductClassifierMapper);
         call.enqueue(callback);
     }
@@ -117,7 +119,7 @@ public class SpoonacularService {
 
         Call<ClassifiedCuisine> call = spoonacularService.classifyCuisine(
             MASHAPE_KEY,
-            URL_FORM_CONTENT_TYPE_HEADER, ACCEPT_HEADER,
+            URL_FORM_CONTENT_TYPE_HEADER, JSON_ACCEPT_HEADER,
             cuisineClassifierMapper.getIngredientListAsString(),
             cuisineClassifierMapper.getTitle());
 
@@ -137,7 +139,7 @@ public class SpoonacularService {
         Call<List<ClassifiedProduct>> call = spoonacularService.classifyAGroceryProductBatch(
                 MASHAPE_KEY,
                 APP_JSON_CONTENT_TYPE_HEADER,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 groceryProductClassifierBatchMapper);
         call.enqueue(callback);
     }
@@ -154,7 +156,7 @@ public class SpoonacularService {
 
         Call<ConvertedAmount> call = spoonacularService.convertAmounts(
                 MASHAPE_KEY,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 amountMapper.getIngredientName(),
                 amountMapper.getSourceAmount(),
                 amountMapper.getSourceUnit(),
@@ -200,7 +202,7 @@ public class SpoonacularService {
         Call<MealPlan> call = spoonacularService.generateMealPlan(
                 MASHAPE_KEY,
                 APP_JSON_CONTENT_TYPE_HEADER,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 mealMapper.getDiet(),
                 mealMapper.getExcludeListAsString(","),
                 mealMapper.getTargetCalories(),
@@ -221,7 +223,7 @@ public class SpoonacularService {
                                                 final Callback<List<GroceryProducts>> callback) {
 
         Call<List<GroceryProducts>> call = spoonacularService
-                .mapIngredientsToGroceryProducts(MASHAPE_KEY, APP_JSON_CONTENT_TYPE_HEADER, ACCEPT_HEADER,
+                .mapIngredientsToGroceryProducts(MASHAPE_KEY, APP_JSON_CONTENT_TYPE_HEADER, JSON_ACCEPT_HEADER,
                         groceryProductsMapper);
 
         call.enqueue(callback);
@@ -239,7 +241,7 @@ public class SpoonacularService {
                                             final Callback<MealPlan> callback) {
         Call<MealPlan> call = spoonacularService.matchRecipesToDailyCalories(
                 MASHAPE_KEY,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 dailyCaloriesMapper.getTargetCalories(),
                 dailyCaloriesMapper.getTimeFrame()
         );
@@ -258,7 +260,7 @@ public class SpoonacularService {
 
         Call<QuickAnswer> call = spoonacularService.getQuickAnswer(
                 MASHAPE_KEY,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 questioMapper.getQ()
         );
         call.enqueue(callback);
@@ -276,8 +278,31 @@ public class SpoonacularService {
 
         Call<RecipeSummary> call = spoonacularService.summarizeRecipe(
                 MASHAPE_KEY,
-                ACCEPT_HEADER,
+                JSON_ACCEPT_HEADER,
                 recipeSummaryMapper.getId()
+        );
+        call.enqueue(callback);
+    }
+
+
+    /**
+     * Visualize Equipment
+     * Visualize the equipment used to make a recipe.
+     *
+     * @param visualizeEquipamentParametersMapper
+     * @param callback
+     */
+    //todo: check custom accept header (text/html or application/json)
+    public void visualizeEquipament(final VisualizeEquipamentParametersMapper visualizeEquipamentParametersMapper,
+                                    final Callback<String> callback) {
+
+        Call<String> call = spoonacularService.visualizeEquipament(
+                MASHAPE_KEY,
+                TEXT_HTML_ACCEPT_HEADER,
+                visualizeEquipamentParametersMapper.isDefaultCss(),
+                visualizeEquipamentParametersMapper.getInstructions(),
+                visualizeEquipamentParametersMapper.isShowBackLink(),
+                visualizeEquipamentParametersMapper.getView()
         );
         call.enqueue(callback);
     }
@@ -289,7 +314,7 @@ public class SpoonacularService {
     public void findRecipesByIngredients(final IngredientsMapper ingredientsMapper, final Callback<List<Recipe>> callback) {
 
         Call<List<Recipe>> call = spoonacularService.findRecipesByIngredients(MASHAPE_KEY,
-                APP_JSON_CONTENT_TYPE_HEADER, ACCEPT_HEADER, ingredientsMapper.isFillIngredients(),
+                APP_JSON_CONTENT_TYPE_HEADER, JSON_ACCEPT_HEADER, ingredientsMapper.isFillIngredients(),
                 ingredientsMapper.getIngredientsAsString(","),
                 ingredientsMapper.isLimitLicense(),
                 ingredientsMapper.getNumber(),
