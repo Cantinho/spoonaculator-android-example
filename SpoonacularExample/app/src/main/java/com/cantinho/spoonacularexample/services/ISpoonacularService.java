@@ -6,6 +6,7 @@ import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
 import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
 import com.cantinho.spoonacularexample.retrofit_models.QuickAnswer;
 import com.cantinho.spoonacularexample.retrofit_models.RecipeInformation;
+import com.cantinho.spoonacularexample.retrofit_models.RecipeSummary;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierBatchMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.GroceryProductClassifierMapper;
@@ -110,6 +111,14 @@ public interface ISpoonacularService {
             @Header("Accept") String accept,
             @Query("q") String q
     );
+
+    @GET("recipes/{id}/summary")
+    Call<RecipeSummary> summarizeRecipe(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String accept,
+            @Path("id") int id
+    );
+
 
     /**
      * ANOTHER CATEGORY

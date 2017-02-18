@@ -6,6 +6,7 @@ import com.cantinho.spoonacularexample.retrofit_models.ConvertedAmount;
 import com.cantinho.spoonacularexample.retrofit_models.GroceryProducts;
 import com.cantinho.spoonacularexample.retrofit_models.MealPlan;
 import com.cantinho.spoonacularexample.retrofit_models.QuickAnswer;
+import com.cantinho.spoonacularexample.retrofit_models.RecipeSummary;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.AmountMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.CuisineClassifierMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.DailyCaloriesMapper;
@@ -17,6 +18,7 @@ import com.cantinho.spoonacularexample.retrofit_models.Recipe;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.MealMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.QuestioMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeSummaryMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -259,9 +261,26 @@ public class SpoonacularService {
                 ACCEPT_HEADER,
                 questioMapper.getQ()
         );
+        call.enqueue(callback);
     }
 
+    /**
+     * Summarize Recipe
+     * Summarize the recipe in a short text.
+     *
+     * @param recipeSummaryMapper
+     * @param callback
+     */
+    public void summarizeRecipe(final RecipeSummaryMapper recipeSummaryMapper,
+                                final Callback<RecipeSummary> callback) {
 
+        Call<RecipeSummary> call = spoonacularService.summarizeRecipe(
+                MASHAPE_KEY,
+                ACCEPT_HEADER,
+                recipeSummaryMapper.getId()
+        );
+        call.enqueue(callback);
+    }
 
     /**
      * ANOTHER CATEGORY
