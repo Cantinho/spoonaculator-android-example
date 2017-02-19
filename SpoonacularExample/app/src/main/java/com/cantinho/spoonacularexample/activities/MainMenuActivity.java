@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.cantinho.spoonacularexample.Card;
 import com.cantinho.spoonacularexample.adapters.MyAdapter;
 import com.cantinho.spoonacularexample.R;
+import com.cantinho.spoonacularexample.models.Card;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -60,8 +60,8 @@ public class MainMenuActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<com.cantinho.spoonacularexample.Card> getDataSet() {
-        ArrayList<com.cantinho.spoonacularexample.Card> results = new ArrayList<>();
+    private ArrayList<Card> getDataSet() {
+        ArrayList<Card> results = new ArrayList<>();
         if(functions != null && !functions.isEmpty()) {
             int functionsSize = functions.size();
             for (int index = 1; index <= functionsSize; index++) {
