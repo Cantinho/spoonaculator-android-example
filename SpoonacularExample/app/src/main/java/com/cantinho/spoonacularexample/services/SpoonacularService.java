@@ -21,6 +21,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeSummaryMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeEquipamentParametersMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeIngredientsParametersMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeNutrientsParametersMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -331,7 +332,19 @@ public class SpoonacularService {
         call.enqueue(callback);
     }
 
+    public void visualizeNutrients(final VisualizeNutrientsParametersMapper visualizeNutrientsParametersMapper,
+                                     final Callback<String> callback) {
 
+        Call<String> call = spoonacularService.visualizeNutrients(
+                MASHAPE_KEY,
+                TEXT_HTML_ACCEPT_HEADER,
+                visualizeNutrientsParametersMapper.isDefaultCss(),
+                visualizeNutrientsParametersMapper.getIngredientsListAsStringPerLine(),
+                visualizeNutrientsParametersMapper.getServings(),
+                visualizeNutrientsParametersMapper.isShowBacklink()
+        );
+        call.enqueue(callback);
+    }
 
 
     /**

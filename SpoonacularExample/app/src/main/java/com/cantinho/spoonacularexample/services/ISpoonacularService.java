@@ -141,6 +141,16 @@ public interface ISpoonacularService {
             @Field("view") String view
     );
 
+    @POST("recipes/visualizeNutrition")
+    Call<String> visualizeNutrients(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String textHtmlAcceptHeader,
+            @Field("defaultCss") boolean defaultCss,
+            @Field("ingredientList") String ingredientsList,
+            @Field("servings") int servings,
+            @Field("showBacklink") boolean showBacklink
+    );
+
     /**
      * ANOTHER CATEGORY
      */
