@@ -151,6 +151,17 @@ public interface ISpoonacularService {
             @Field("showBacklink") boolean showBacklink
     );
 
+    @POST("recipes/visualizePriceEstimator")
+    Call<String> visualizePriceBreakdown(
+            @Header("X-Mashape-Key") String mashapeKey,
+            @Header("Accept") String textHtmlAcceptHeader,
+            @Field("defaultCss") boolean defaultCss,
+            @Field("ingredientList") String ingredientsList,
+            @Field("mode") int mode,
+            @Field("servings") int servings,
+            @Field("showBacklink") boolean showBacklink
+    );
+
     /**
      * ANOTHER CATEGORY
      */
@@ -180,7 +191,6 @@ public interface ISpoonacularService {
             @Header("Accept") String accept,
             @Path("id") int id,
             @Query("includeNutrition") boolean includeNutrition);
-
 
 
 }

@@ -22,6 +22,7 @@ import com.cantinho.spoonacularexample.retrofit_models.mappers.RecipeSummaryMapp
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeEquipamentParametersMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeIngredientsParametersMapper;
 import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizeNutrientsParametersMapper;
+import com.cantinho.spoonacularexample.retrofit_models.mappers.VisualizePriceBreakdownParametersMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -332,6 +333,13 @@ public class SpoonacularService {
         call.enqueue(callback);
     }
 
+    /**
+     * Visualize Nutrition
+     * Visualize a recipe's nutritional information.
+     *
+     * @param visualizeNutrientsParametersMapper
+     * @param callback
+     */
     public void visualizeNutrients(final VisualizeNutrientsParametersMapper visualizeNutrientsParametersMapper,
                                      final Callback<String> callback) {
 
@@ -342,6 +350,21 @@ public class SpoonacularService {
                 visualizeNutrientsParametersMapper.getIngredientsListAsStringPerLine(),
                 visualizeNutrientsParametersMapper.getServings(),
                 visualizeNutrientsParametersMapper.isShowBacklink()
+        );
+        call.enqueue(callback);
+    }
+
+    public void visualizePriceBreakdown(final VisualizePriceBreakdownParametersMapper visualizePriceBreakdownParametersMapper,
+                                   final Callback<String> callback) {
+
+        Call<String> call = spoonacularService.visualizePriceBreakdown(
+                MASHAPE_KEY,
+                TEXT_HTML_ACCEPT_HEADER,
+                visualizePriceBreakdownParametersMapper.isDefaultCss(),
+                visualizePriceBreakdownParametersMapper.getIngredientsListAsStringPerLine(),
+                visualizePriceBreakdownParametersMapper.getMode(),
+                visualizePriceBreakdownParametersMapper.getServings(),
+                visualizePriceBreakdownParametersMapper.isShowBacklink()
         );
         call.enqueue(callback);
     }
